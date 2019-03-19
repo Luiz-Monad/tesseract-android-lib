@@ -12,7 +12,7 @@ else()
 endif()
 
 if(HAVE_CUDA)
-  ocv_cmake_configure("${CMAKE_CURRENT_LIST_DIR}/templates/3rdPartyConfig-CUDA.cmake.in" CUDA_CONFIGCMAKE @ONLY)
+  ocv_cmake_configure("${CMAKE_CURRENT_LIST_DIR}/templates/OpenCVConfig-CUDA.cmake.in" CUDA_CONFIGCMAKE @ONLY)
 endif()
 
 if(ANDROID)
@@ -21,7 +21,7 @@ if(ANDROID)
   else()
     set(OpenCV_ANDROID_NATIVE_API_LEVEL_CONFIGCMAKE "${ANDROID_NATIVE_API_LEVEL}")
   endif()
-  ocv_cmake_configure("${CMAKE_CURRENT_LIST_DIR}/templates/3rdPartyConfig-ANDROID.cmake.in" ANDROID_CONFIGCMAKE @ONLY)
+  ocv_cmake_configure("${CMAKE_CURRENT_LIST_DIR}/templates/OpenCVConfig-ANDROID.cmake.in" ANDROID_CONFIGCMAKE @ONLY)
 endif()
 
 set(OPENCV_MODULES_CONFIGCMAKE ${OPENCV_MODULES_PUBLIC})

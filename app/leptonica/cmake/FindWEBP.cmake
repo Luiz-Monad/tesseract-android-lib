@@ -12,7 +12,7 @@ unset(WEBP_FOUND)
 
 # Look for the target.
 # find_package(3rdParty REQUIRED COMPONENTS opencv_libwebp)
-find_library(opencv_libwebp OPTIONAL)
+find_library(opencv_libwebp REQUIRED)
 if(opencv_libwebp_FOUND)
     get_target_property(WEBP_LIBRARY opencv_libwebp OUTPUT_NAME)
     get_target_property(WEBP_INCLUDE_DIR opencv_libwebp LIBRARY_OUTPUT_DIRECTORY)

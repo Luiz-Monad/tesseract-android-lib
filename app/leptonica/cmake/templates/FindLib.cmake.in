@@ -12,7 +12,7 @@ unset(@LIB@_FOUND)
 
 # Look for the target.
 # find_package(3rdParty REQUIRED COMPONENTS @TARGET@)
-find_library(@TARGET@ OPTIONAL)
+find_library(@TARGET@ REQUIRED)
 if(@TARGET@_FOUND)
     get_target_property(@LIB@_LIBRARY @TARGET@ OUTPUT_NAME)
     get_target_property(@LIB@_INCLUDE_DIR @TARGET@ LIBRARY_OUTPUT_DIRECTORY)

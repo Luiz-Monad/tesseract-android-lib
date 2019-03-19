@@ -12,7 +12,7 @@ unset(JPEG_FOUND)
 
 # Look for the target.
 # find_package(3rdParty REQUIRED COMPONENTS opencv_libjpeg)
-find_library(opencv_libjpeg OPTIONAL)
+find_library(opencv_libjpeg REQUIRED)
 if(opencv_libjpeg_FOUND)
     get_target_property(JPEG_LIBRARY opencv_libjpeg OUTPUT_NAME)
     get_target_property(JPEG_INCLUDE_DIR opencv_libjpeg LIBRARY_OUTPUT_DIRECTORY)
