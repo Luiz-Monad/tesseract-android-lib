@@ -1,0 +1,10 @@
+syntax: glob
+.gradle/*
+.idea/*
+app/.externalNativeBuild/*
+app/build/*
+gradle/*
+.git/*
+.hg/*
+build/*
+.vscode/*

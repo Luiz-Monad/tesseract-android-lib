@@ -89,10 +89,8 @@ status("")
 status("General configuration for Leptonica ${VERSION_PLAIN} =====================================")
 status("    Build utility programs?:"            BUILD_PROG THEN YES ELSE NO)
 
-# ========================== MEDIA IO ==========================
-
 status("")
-status("  Media I/O: ")
+status("  Dependencies: ")
 status("    ZLib:"       ZLIB_FOUND    THEN "${ZLIB_LIBRARIES} (ver ${ZLIB_VERSION_STRING})"   ELSE "NO")
 status("    JPEG:"       JPEG_FOUND    THEN "${JPEG_LIBRARY} (ver ${JPEG_LIB_VERSION})"        ELSE "NO")
 status("    WEBP:"       WEBP_FOUND    THEN "${WEBP_LIBRARY} (ver ${WEBP_VERSION})"            ELSE "NO")
@@ -176,4 +174,4 @@ install(FILES
 ###############################################################################
 
 # This should be the last command
-ocv_cmake_dump_vars("" TOFILE "CMakeVarsLeptonica.txt")
+lep_cmake_dump_vars("" TOFILE "CMakeVars.txt")

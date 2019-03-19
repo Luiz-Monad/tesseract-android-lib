@@ -12,7 +12,7 @@ unset(TIFF_FOUND)
 
 # Look for the target.
 # find_package(3rdParty REQUIRED COMPONENTS opencv_libtiff)
-find_library(opencv_libtiff OPTIONAL)
+find_library(opencv_libtiff REQUIRED)
 if(opencv_libtiff_FOUND)
     get_target_property(TIFF_LIBRARY opencv_libtiff OUTPUT_NAME)
     get_target_property(TIFF_INCLUDE_DIR opencv_libtiff LIBRARY_OUTPUT_DIRECTORY)
