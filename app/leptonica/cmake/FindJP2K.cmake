@@ -11,11 +11,12 @@
 unset(JP2K_FOUND)
 
 # Look for the target.
+# find_package(3rdParty REQUIRED COMPONENTS opencv_libjasper)
 find_library(opencv_libjasper OPTIONAL)
-get_target_property(JP2K_INCLUDE_DIR opencv_libjasper INCLUDE_DIRECTORIES)
-get_target_property(JP2K_LIBRARY opencv_libjasper OUTPUT_NAME)
+if(opencv_libjasper_FOUND)
+    get_target_property(JP2K_LIBRARY opencv_libjasper OUTPUT_NAME)
+    get_target_property(JP2K_INCLUDE_DIR opencv_libjasper LIBRARY_OUTPUT_DIRECTORY)
 
-if(JP2K_INCLUDE_DIR)
     MARK_AS_ADVANCED(JP2K_LIBRARY)
     MARK_AS_ADVANCED(JP2K_INCLUDE_DIR)
 

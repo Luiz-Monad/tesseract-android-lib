@@ -1,8 +1,8 @@
-[OpenCV-Android-Lib](https://github.com/Byte-666/opencv-android-lib)
+[Tesseract-Android-Lib](https://github.com/Byte-666/opencv-android-lib)
 ==============
 
-* OpenCV for Android compiled statically as an object library.
-* [OpenCV](https://github.com/opencv/opencv)
+* Tesseract for Android compiled statically as an object library.
+* [Tesseract](https://github.com/tesseract-ocr/tesseract)
 
 Supported Architecture
 ----

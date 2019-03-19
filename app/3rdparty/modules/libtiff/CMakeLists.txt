@@ -81,8 +81,9 @@ set(lib_hdrs
     tif_predict.h
     uvcode.h
     tiffio.hxx
-    "${CMAKE_CURRENT_BINARY_DIR}/tif_config.h"
     )
+
+set(lib_ext_hdrs "${CMAKE_CURRENT_BINARY_DIR}/tif_config.h")
 
 if(WIN32 AND NOT WINRT)
   list(APPEND lib_srcs tif_win32.c)
@@ -108,6 +109,8 @@ if(UNIX AND (CMAKE_COMPILER_IS_GNUCXX OR CV_ICC))
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 endif()
 
-ocv_set_module_sources(SOURCES ${lib_srcs} HEADERS ${lib_hdrs})
+ocv_set_module_sources(SOURCES ${lib_srcs} HEADERS ${lib_hdrs} ${lib_ext_hdrs})
 
 ocv_create_module(${ZLIB_LIBRARIES})
+
+install(FILES ${lib_hdrs} OPTIONAL DESTINATION "${CMAKE_CURRENT_BINARY_DIR}" COMPONENT libs)

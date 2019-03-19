@@ -62,3 +62,4 @@ endif()
 
 ocv_create_module()
 
+install(FILES ${lib_hdrs} OPTIONAL DESTINATION "${CMAKE_CURRENT_BINARY_DIR}" COMPONENT libs)

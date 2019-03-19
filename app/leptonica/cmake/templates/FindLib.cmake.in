@@ -11,11 +11,12 @@
 unset(@LIB@_FOUND)
 
 # Look for the target.
+# find_package(3rdParty REQUIRED COMPONENTS @TARGET@)
 find_library(@TARGET@ OPTIONAL)
-get_target_property(@LIB@_INCLUDE_DIR @TARGET@ INCLUDE_DIRECTORIES)
-get_target_property(@LIB@_LIBRARY @TARGET@ OUTPUT_NAME)
+if(@TARGET@_FOUND)
+    get_target_property(@LIB@_LIBRARY @TARGET@ OUTPUT_NAME)
+    get_target_property(@LIB@_INCLUDE_DIR @TARGET@ LIBRARY_OUTPUT_DIRECTORY)
 
-if(@LIB@_INCLUDE_DIR)
     MARK_AS_ADVANCED(@LIB@_LIBRARY)
     MARK_AS_ADVANCED(@LIB@_INCLUDE_DIR)
 

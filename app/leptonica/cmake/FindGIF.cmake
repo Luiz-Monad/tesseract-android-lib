@@ -11,11 +11,12 @@
 unset(GIF_FOUND)
 
 # Look for the target.
+# find_package(3rdParty REQUIRED COMPONENTS opencv_libgif)
 find_library(opencv_libgif OPTIONAL)
-get_target_property(GIF_INCLUDE_DIR opencv_libgif INCLUDE_DIRECTORIES)
-get_target_property(GIF_LIBRARY opencv_libgif OUTPUT_NAME)
+if(opencv_libgif_FOUND)
+    get_target_property(GIF_LIBRARY opencv_libgif OUTPUT_NAME)
+    get_target_property(GIF_INCLUDE_DIR opencv_libgif LIBRARY_OUTPUT_DIRECTORY)
 
-if(GIF_INCLUDE_DIR)
     MARK_AS_ADVANCED(GIF_LIBRARY)
     MARK_AS_ADVANCED(GIF_INCLUDE_DIR)
 

@@ -11,11 +11,12 @@
 unset(TIFF_FOUND)
 
 # Look for the target.
+# find_package(3rdParty REQUIRED COMPONENTS opencv_libtiff)
 find_library(opencv_libtiff OPTIONAL)
-get_target_property(TIFF_INCLUDE_DIR opencv_libtiff INCLUDE_DIRECTORIES)
-get_target_property(TIFF_LIBRARY opencv_libtiff OUTPUT_NAME)
+if(opencv_libtiff_FOUND)
+    get_target_property(TIFF_LIBRARY opencv_libtiff OUTPUT_NAME)
+    get_target_property(TIFF_INCLUDE_DIR opencv_libtiff LIBRARY_OUTPUT_DIRECTORY)
 
-if(TIFF_INCLUDE_DIR)
     MARK_AS_ADVANCED(TIFF_LIBRARY)
     MARK_AS_ADVANCED(TIFF_INCLUDE_DIR)
 

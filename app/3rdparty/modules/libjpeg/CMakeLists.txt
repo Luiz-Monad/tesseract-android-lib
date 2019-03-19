@@ -45,3 +45,5 @@ ocv_warnings_disable(CMAKE_C_FLAGS -Wunused-parameter) # clang
 ocv_warnings_disable(CMAKE_C_FLAGS /wd4013 /wd4244 /wd4267) # vs2005
 
 ocv_create_module()
+
+install(FILES ${lib_hdrs} OPTIONAL DESTINATION "${CMAKE_CURRENT_BINARY_DIR}" COMPONENT libs)

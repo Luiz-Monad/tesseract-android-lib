@@ -46,3 +46,5 @@ ocv_warnings_disable(CMAKE_C_FLAGS -Wunused-variable -Wunused-function -Wshadow 
 ocv_warnings_disable(CMAKE_C_FLAGS /wd4244 /wd4267) # vs2005
 
 ocv_create_module(${ZLIB_LIBRARIES})
+
+install(FILES ${lib_hdrs} OPTIONAL DESTINATION "${CMAKE_CURRENT_BINARY_DIR}" COMPONENT libs)

@@ -24,7 +24,6 @@ ocv_module_include_directories(${ZLIB_INCLUDE_DIRS})
 file(GLOB lib_srcs *.c)
 file(GLOB lib_hdrs *.h)
 
-
 if(ENABLE_NEON)
   list(APPEND lib_srcs arm/arm_init.c arm/filter_neon.S arm/filter_neon_intrinsics.c)
   add_definitions(-DPNG_ARM_NEON_OPT=2)
@@ -57,3 +56,5 @@ endif()
 ocv_warnings_disable(CMAKE_C_FLAGS -Wcast-align)
 
 ocv_create_module(${ZLIB_LIBRARIES})
+
+install(FILES ${lib_hdrs} OPTIONAL DESTINATION "${CMAKE_CURRENT_BINARY_DIR}" COMPONENT libs)
