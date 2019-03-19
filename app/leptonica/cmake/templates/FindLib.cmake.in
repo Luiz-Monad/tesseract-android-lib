@@ -1,0 +1,29 @@
+#=============================================================================
+# Find @LIB@ library
+#=============================================================================
+# Find the native @LIB@ headers and libraries.
+#
+#  @LIB@_INCLUDE_DIRS - where to find @LIB@/decode.h, etc.
+#  @LIB@_LIBRARIES    - List of libraries when using @LIB@.
+#  @LIB@_FOUND        - True if @LIB@ is found.
+#=============================================================================
+
+unset(@LIB@_FOUND)
+
+# Look for the target.
+find_library(@TARGET@ OPTIONAL)
+get_target_property(@LIB@_INCLUDE_DIR @TARGET@ INCLUDE_DIRECTORIES)
+get_target_property(@LIB@_LIBRARY @TARGET@ OUTPUT_NAME)
+
+if(@LIB@_INCLUDE_DIR)
+    MARK_AS_ADVANCED(@LIB@_LIBRARY)
+    MARK_AS_ADVANCED(@LIB@_INCLUDE_DIR)
+
+    # handle the QUIETLY and REQUIRED arguments and set @LIB@_FOUND to TRUE if
+    # all listed variables are TRUE
+    INCLUDE(${CMAKE_ROOT}/Modules/FindPackageHandleStandardArgs.cmake)
+    FIND_PACKAGE_HANDLE_STANDARD_ARGS(@LIB@ DEFAULT_MSG @LIB@_LIBRARY @LIB@_INCLUDE_DIR)
+
+    SET(@LIB@_LIBRARIES ${@LIB@_LIBRARY})
+    SET(@LIB@_INCLUDE_DIRS ${@LIB@_INCLUDE_DIR})
+endif()
