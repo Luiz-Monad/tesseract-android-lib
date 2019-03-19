@@ -2,7 +2,7 @@ if (NOT GENERATE_ABI_DESCRIPTOR)
   return()
 endif()
 
-set(filename "opencv_abi.xml")
+set(filename "thirdparty_abi.xml")
 set(path1 "${CMAKE_BINARY_DIR}/${filename}")
 
 set(modules "${OPENCV_MODULES_PUBLIC}")

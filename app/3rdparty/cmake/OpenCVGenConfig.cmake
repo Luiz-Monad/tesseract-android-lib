@@ -1,8 +1,8 @@
 # --------------------------------------------------------------------------------------------
-#  Installation for CMake Module:  OpenCVConfig.cmake
-#  Part 1/3: ${BIN_DIR}/OpenCVConfig.cmake              -> For use *without* "make install"
-#  Part 2/3: ${BIN_DIR}/unix-install/OpenCVConfig.cmake -> For use with "make install"
-#  Part 3/3: ${BIN_DIR}/win-install/OpenCVConfig.cmake  -> For use within binary installers/packages
+#  Installation for CMake Module:  3rdPartyConfig.cmake
+#  Part 1/3: ${BIN_DIR}/3rdPartyConfig.cmake              -> For use *without* "make install"
+#  Part 2/3: ${BIN_DIR}/unix-install/3rdPartyConfig.cmake -> For use with "make install"
+#  Part 3/3: ${BIN_DIR}/win-install/3rdPartyConfig.cmake  -> For use within binary installers/packages
 # -------------------------------------------------------------------------------------------
 
 if(INSTALL_TO_MANGLED_PATHS)
@@ -12,7 +12,7 @@ else()
 endif()
 
 if(HAVE_CUDA)
-  ocv_cmake_configure("${CMAKE_CURRENT_LIST_DIR}/templates/OpenCVConfig-CUDA.cmake.in" CUDA_CONFIGCMAKE @ONLY)
+  ocv_cmake_configure("${CMAKE_CURRENT_LIST_DIR}/templates/3rdPartyConfig-CUDA.cmake.in" CUDA_CONFIGCMAKE @ONLY)
 endif()
 
 if(ANDROID)
@@ -21,7 +21,7 @@ if(ANDROID)
   else()
     set(OpenCV_ANDROID_NATIVE_API_LEVEL_CONFIGCMAKE "${ANDROID_NATIVE_API_LEVEL}")
   endif()
-  ocv_cmake_configure("${CMAKE_CURRENT_LIST_DIR}/templates/OpenCVConfig-ANDROID.cmake.in" ANDROID_CONFIGCMAKE @ONLY)
+  ocv_cmake_configure("${CMAKE_CURRENT_LIST_DIR}/templates/3rdPartyConfig-ANDROID.cmake.in" ANDROID_CONFIGCMAKE @ONLY)
 endif()
 
 set(OPENCV_MODULES_CONFIGCMAKE ${OPENCV_MODULES_PUBLIC})
@@ -31,9 +31,9 @@ if(BUILD_FAT_JAVA_LIB AND HAVE_opencv_java)
 endif()
 
 # -------------------------------------------------------------------------------------------
-#  Part 1/3: ${BIN_DIR}/OpenCVConfig.cmake              -> For use *without* "make install"
+#  Part 1/3: ${BIN_DIR}/3rdPartyConfig.cmake              -> For use *without* "make install"
 # -------------------------------------------------------------------------------------------
-set(OpenCV_INCLUDE_DIRS_CONFIGCMAKE "\"${OPENCV_CONFIG_FILE_INCLUDE_DIR}\" \"${OpenCV_SOURCE_DIR}/include\" \"${OpenCV_SOURCE_DIR}/include/opencv\"")
+set(OpenCV_INCLUDE_DIRS_CONFIGCMAKE "\"${OPENCV_CONFIG_FILE_INCLUDE_DIR}\" \"${OpenCV_SOURCE_DIR}/include\" \"${OpenCV_SOURCE_DIR}/include/3rdParty\"")
 
 foreach(m ${OPENCV_MODULES_BUILD})
   if(EXISTS "${OPENCV_MODULE_${m}_LOCATION}/include")
@@ -41,7 +41,7 @@ foreach(m ${OPENCV_MODULES_BUILD})
   endif()
 endforeach()
 
-export(TARGETS ${OpenCVModules_TARGETS} FILE "${CMAKE_BINARY_DIR}/OpenCVModules.cmake")
+export(TARGETS ${ThirdPartyModules_TARGETS} FILE "${CMAKE_BINARY_DIR}/ThirdPartyModules.cmake")
 
 if(TARGET ippicv AND NOT BUILD_SHARED_LIBS)
   set(USE_IPPICV TRUE)
@@ -51,12 +51,12 @@ else()
   set(USE_IPPICV FALSE)
 endif()
 
-configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/OpenCVConfig.cmake.in" "${CMAKE_BINARY_DIR}/OpenCVConfig.cmake" @ONLY)
+configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/OpenCVConfig.cmake.in" "${CMAKE_BINARY_DIR}/3rdPartyConfig.cmake" @ONLY)
 #support for version checking when finding opencv. find_package(OpenCV 2.3.1 EXACT) should now work.
-configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/OpenCVConfig-version.cmake.in" "${CMAKE_BINARY_DIR}/OpenCVConfig-version.cmake" @ONLY)
+configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/OpenCVConfig-version.cmake.in" "${CMAKE_BINARY_DIR}/3rdPartyConfig-version.cmake" @ONLY)
 
 # --------------------------------------------------------------------------------------------
-#  Part 2/3: ${BIN_DIR}/unix-install/OpenCVConfig.cmake -> For use *with* "make install"
+#  Part 2/3: ${BIN_DIR}/unix-install/3rdPartyConfig.cmake -> For use *with* "make install"
 # -------------------------------------------------------------------------------------------
 file(RELATIVE_PATH OpenCV_INSTALL_PATH_RELATIVE_CONFIGCMAKE "${CMAKE_INSTALL_PREFIX}/${OPENCV_CONFIG_INSTALL_PATH}/" ${CMAKE_INSTALL_PREFIX})
 set(OpenCV_INCLUDE_DIRS_CONFIGCMAKE "\"\${OpenCV_INSTALL_PATH}/${OPENCV_INCLUDE_INSTALL_PATH}\" \"\${OpenCV_INSTALL_PATH}/${OPENCV_INCLUDE_INSTALL_PATH}/opencv\"")
@@ -72,21 +72,21 @@ function(ocv_gen_config TMP_DIR NESTED_PATH ROOT_NAME)
 
   file(RELATIVE_PATH OpenCV_INSTALL_PATH_RELATIVE_CONFIGCMAKE "${CMAKE_INSTALL_PREFIX}/${__install_nested}" "${CMAKE_INSTALL_PREFIX}/")
 
-  configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/OpenCVConfig-version.cmake.in" "${TMP_DIR}/OpenCVConfig-version.cmake" @ONLY)
+  configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/OpenCVConfig-version.cmake.in" "${TMP_DIR}/3rdPartyConfig-version.cmake" @ONLY)
 
-  configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/OpenCVConfig.cmake.in" "${__tmp_nested}/OpenCVConfig.cmake" @ONLY)
-  install(EXPORT OpenCVModules DESTINATION "${__install_nested}" FILE OpenCVModules.cmake COMPONENT dev)
+  configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/OpenCVConfig.cmake.in" "${__tmp_nested}/3rdPartyConfig.cmake" @ONLY)
+  install(EXPORT ThirdPartyModules DESTINATION "${__install_nested}" FILE ThirdPartyModules.cmake COMPONENT dev)
   install(FILES
-      "${TMP_DIR}/OpenCVConfig-version.cmake"
-      "${__tmp_nested}/OpenCVConfig.cmake"
+      "${TMP_DIR}/3rdPartyConfig-version.cmake"
+      "${__tmp_nested}/3rdPartyConfig.cmake"
       DESTINATION "${__install_nested}" COMPONENT dev)
 
   if(ROOT_NAME)
     # Root config file
-    configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/${ROOT_NAME}" "${TMP_DIR}/OpenCVConfig.cmake" @ONLY)
+    configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/${ROOT_NAME}" "${TMP_DIR}/3rdPartyConfig.cmake" @ONLY)
     install(FILES
-        "${TMP_DIR}/OpenCVConfig-version.cmake"
-        "${TMP_DIR}/OpenCVConfig.cmake"
+        "${TMP_DIR}/3rdPartyConfig-version.cmake"
+        "${__tmp_nested}/3rdPartyConfig.cmake"
         DESTINATION "${OPENCV_CONFIG_INSTALL_PATH}" COMPONENT dev)
   endif()
 endfunction()
@@ -101,7 +101,7 @@ if(ANDROID)
 endif()
 
 # --------------------------------------------------------------------------------------------
-#  Part 3/3: ${BIN_DIR}/win-install/OpenCVConfig.cmake  -> For use within binary installers/packages
+#  Part 3/3: ${BIN_DIR}/win-install/3rdPartyConfig.cmake  -> For use within binary installers/packages
 # --------------------------------------------------------------------------------------------
 if(WIN32)
   if(CMAKE_HOST_SYSTEM_NAME MATCHES Windows)

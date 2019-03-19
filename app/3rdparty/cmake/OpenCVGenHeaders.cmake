@@ -1,10 +1,10 @@
 # platform-specific config file
-configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/cvconfig.h.in" "${OPENCV_CONFIG_FILE_INCLUDE_DIR}/cvconfig.h")
-configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/cvconfig.h.in" "${OPENCV_CONFIG_FILE_INCLUDE_DIR}/opencv2/cvconfig.h")
-install(FILES "${OPENCV_CONFIG_FILE_INCLUDE_DIR}/cvconfig.h" DESTINATION ${OPENCV_INCLUDE_INSTALL_PATH}/opencv2 COMPONENT dev)
+configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/cvconfig.h.in" "${OPENCV_CONFIG_FILE_INCLUDE_DIR}/3Pconfig.h")
+configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/cvconfig.h.in" "${OPENCV_CONFIG_FILE_INCLUDE_DIR}/3rdParty/3Pconfig.h")
+install(FILES "${OPENCV_CONFIG_FILE_INCLUDE_DIR}/3Pconfig.h" DESTINATION ${OPENCV_INCLUDE_INSTALL_PATH}/3rdParty COMPONENT dev)
 
 # ----------------------------------------------------------------------------
-#  opencv_modules.hpp based on actual modules list
+#  modules.hpp based on actual modules list
 # ----------------------------------------------------------------------------
 set(OPENCV_MODULE_DEFINITIONS_CONFIGMAKE "")
 
@@ -24,5 +24,5 @@ set(OPENCV_MODULE_DEFINITIONS_CONFIGMAKE "${OPENCV_MODULE_DEFINITIONS_CONFIGMAKE
 #  set(OPENCV_MODULE_DEFINITIONS_CONFIGMAKE "${OPENCV_MODULE_DEFINITIONS_CONFIGMAKE}#undef HAVE_${m}\n")
 #endforeach()
 
-configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/opencv_modules.hpp.in" "${OPENCV_CONFIG_FILE_INCLUDE_DIR}/opencv2/opencv_modules.hpp")
-install(FILES "${OPENCV_CONFIG_FILE_INCLUDE_DIR}/opencv2/opencv_modules.hpp" DESTINATION ${OPENCV_INCLUDE_INSTALL_PATH}/opencv2 COMPONENT dev)
+configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/opencv_modules.hpp.in" "${OPENCV_CONFIG_FILE_INCLUDE_DIR}/3rdParty/modules.hpp")
+install(FILES "${OPENCV_CONFIG_FILE_INCLUDE_DIR}/3rdParty/modules.hpp" DESTINATION ${OPENCV_INCLUDE_INSTALL_PATH}/3rdParty COMPONENT dev)
