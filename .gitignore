@@ -10,5 +10,9 @@
 /captures
 .externalNativeBuild
 .hg/*
+<<<<<<< HEAD
 build/*
 .vscode/*
+=======
+build/*
+>>>>>>> d0ebc77f7c07a8c071359e8ffff844859cddb893
